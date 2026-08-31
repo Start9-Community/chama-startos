@@ -1,0 +1,30 @@
+.git
+.github
+.gitmodules
+node_modules
+javascript
+ncc-cache
+docker-images
+*.s9pk
+
+# Nothing under the submodule but the web client and the Rust bridge reaches the
+# image; the desktop, Android, marketing and docs trees are ~130 MB of context.
+chama/.git
+chama/.github
+chama/.claude
+chama/.startos
+chama/android
+chama/assets
+chama/dist
+chama/docs
+chama/javascript
+chama/landing
+chama/native/fedimint-bridge/target
+chama/node_modules
+chama/src-tauri
+chama/startos
+chama/zapstore
+chama/*.pdf
+chama/*.jpg
+chama/icon.*
+chama/*.s9pk

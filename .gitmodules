@@ -1,0 +1,3 @@
+[submodule "chama"]
+	path = chama
+	url = https://github.com/jesuspirate/chama.git
