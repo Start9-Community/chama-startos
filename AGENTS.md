@@ -26,6 +26,10 @@ verified, tried, and decided belongs in the commit message and the PR body.
 
 ## This repo
 
+- **Never update or synchronize `Start9-Community/chama`.** It is a retired application fork;
+  its ahead/behind count is irrelevant. Application commits and `vX.Y.Z` tags come only from
+  <https://github.com/jesuspirate/chama>. StartOS packaging and `vX.Y.Z_<revision>` releases live
+  only in <https://github.com/Start9-Community/chama-startos>.
 - **The application is the `chama/` submodule and is never edited here.** Fixes to Chama itself
   go to <https://github.com/jesuspirate/chama>; this repo moves the pin once the fix is tagged.
   If a fix upstream hasn't taken is genuinely needed, add a `patches/` directory applied in the

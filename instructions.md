@@ -1,48 +1,44 @@
 # Chama
 
-Chama is a self-hosted peer-to-peer marketplace for local commerce with Bitcoin rails. It coordinates offers and trades over Nostr without a central Chama account server or custodial middleman. Trades can settle with Fedimint ecash, Lightning, or opt-in on-chain Bitcoin.
+Chama is local commerce with Bitcoin rails. It lets people exchange sats and local currency, pay community bills, run storefronts, and find work through Nostr—without a central Chama account server or custodial Chama wallet.
+
+Trades use your chosen Fedimint federation, Lightning, or opt-in on-chain Bitcoin. Fedimint escrow is shared between buyer, seller, and a community arbiter; normal trades settle between the two traders, while the arbiter only steps in when something needs attention.
 
 ## What you get on StartOS
 
-One **Chama** web interface backed by one native Rust Fedimint wallet. Open it from the Interfaces tab and use it like the ordinary Chama app. Buyers, sellers, and community arbiters use their own Chama identities and coordinate over Nostr; they are not three clients bundled into one server.
+One **Chama** web interface backed by one native Fedimint wallet on your StartOS server. Your identity and trade coordination use Nostr, while the native bridge holds the device-local federation state needed to receive and escrow ecash.
 
-## Upgrading from 5.7.0
-
-The earlier StartOS package exposed three co-located clients for testing. This release retires that model and keeps the former **Client One** as the single **Chama** interface. Its interface identity, browser origin, port, and `/data/client-1` wallet directory remain unchanged so the primary app and wallet survive the upgrade.
-
-Client Two and Client Three are no longer launched or shown. Their `/data/client-2` and `/data/client-3` directories are not deleted and remain in StartOS backups, but this release does not provide an interface for spending from them. If you intentionally kept ecash in either experimental client, export it before upgrading.
-
-## Getting set up
+## Getting started
 
 1. Open **Chama** from the Interfaces tab.
-2. Create a new Chama identity or import your existing Nostr account key.
-3. Join your chosen Fedimint federation inside Chama.
-4. Save the Nostr account key and any exported ecash fund backups somewhere safe.
+2. Create a Chama identity or import your Nostr account key.
+3. Choose your home community and join its Fedimint federation inside Chama.
+4. Store your Nostr key and any exported ecash backups somewhere safe.
 
-The native wallet cannot receive or escrow ecash until it has joined a federation.
+The wallet cannot receive or escrow ecash until it has joined a federation. While it starts, Chama keeps you signed in and shows **Connecting**. If startup really fails, use **Reconnect**. Accounts with long histories may briefly show **Checking your complete trade history…** before reminders and attention counts appear.
 
-While the wallet or Nostr relays are still starting, Chama keeps you signed in and preserves your selected home community. The Chama bar shows **Connecting** during startup and **Reconnect** if it fails. On accounts with a long trade history, **Checking your complete trade history…** stays visible — and action badges and old listing reminders stay hidden — until Chama has replayed your saved trades and finished its relay discovery pass.
+## What StartOS backs up
 
-Your Nostr account key restores your identity and trade history, not bearer ecash. Move each completed trade out through Lightning, on-chain, or ecash, and keep exported notes somewhere safe.
+StartOS backs up the native wallet files on the server. It does not back up browser-local identity, contacts, drafts, settings, or cached trade views. Those belong to the exact Chama interface address opened in your browser.
 
-On iPhone, use standard Safari if a third-party or private browser reports that secure local wallet storage is unavailable; its "unknown transient reason (e.g. out of memory)" message is a browser storage error and does not mean the phone is out of memory.
-
-## Backups
-
-StartOS backs up the native wallet data stored on the server. Your Nostr identity, contacts, drafts, settings, and browser-side trade cache belong to the exact browser origin used to open Chama and are not included in the server backup.
-
-Do not treat the Nostr account key as an ecash balance backup. For funds, use Chama's ecash export and store the bearer note safely.
+Your Nostr key restores identity and relay-visible history; it does not recreate bearer ecash. Claim completed trades to your preferred destination and store exported ecash notes safely.
 
 ## Wallet Bridge Status
 
-The read-only **Wallet Bridge Status** action reports whether the native wallet bridge responds, whether Chama has joined a federation, and whether federation relay discovery is reachable, degraded, still probing, or not configured. Run it when Chama loads but wallet balances or payments are unavailable.
+Run the read-only **Wallet Bridge Status** action if Chama opens but wallet balances or payments are unavailable. It reports whether the wallet bridge responds, whether it has joined a federation, and whether federation relay discovery is working.
 
-## Security note
+## Security
 
-The browser session and native wallet can authorize real payments. Expose the interface only through addresses and devices you trust.
+The Chama interface and native wallet can authorize real payments. Use only trusted StartOS addresses and devices, and do not share exported ecash notes.
 
-## Documentation
+## Legacy upgrade note
+
+Very old StartOS installations may retain Client Two or Client Three wallet directories from the retired testing package. Current Chama serves one interface and does not delete those old directories from backups. If you knowingly left ecash in an experimental client, export it before upgrading.
+
+## Project links
 
 - [Chama website](https://getchama.app/)
-- [Technical overview](https://github.com/jesuspirate/chama/blob/main/chama-technical-overview.pdf)
-- [Relay operations](https://github.com/jesuspirate/chama/blob/main/docs/RELAY_OPERATIONS.md)
+- [Chama application](https://github.com/jesuspirate/chama)
+- [StartOS package](https://github.com/Start9-Community/chama-startos)
+
+The old `Start9-Community/chama` fork is retired and is not an update or release source.
