@@ -1,48 +1,42 @@
 # Chama
 
-Chama is a self-hosted peer-to-peer marketplace for local commerce with Bitcoin rails. It coordinates offers and trades over Nostr without a central Chama account server or custodial middleman. Trades can settle with Fedimint ecash, Lightning, or opt-in on-chain Bitcoin.
+## Documentation
+
+- [Chama documentation](https://github.com/jesuspirate/chama#readme) — how trades, escrow, arbitration, and relays work.
 
 ## What you get on StartOS
 
-One **Chama** web interface backed by one native Rust Fedimint wallet. Open it from the Interfaces tab and use it like the ordinary Chama app. Buyers, sellers, and community arbiters use their own Chama identities and coordinate over Nostr; they are not three clients bundled into one server.
+One Chama web interface, and a Fedimint wallet that lives on your server rather than in your browser.
 
-## Upgrading from 5.7.0
-
-The earlier StartOS package exposed three co-located clients for testing. This release retires that model and keeps the former **Client One** as the single **Chama** interface. Its interface identity, browser origin, port, and `/data/client-1` wallet directory remain unchanged so the primary app and wallet survive the upgrade.
-
-Client Two and Client Three are no longer launched or shown. Their `/data/client-2` and `/data/client-3` directories are not deleted and remain in StartOS backups, but this release does not provide an interface for spending from them. If you intentionally kept ecash in either experimental client, export it before upgrading.
+That wallet is the difference worth knowing about. Run Chama anywhere else and your ecash sits in browser storage, which vanishes if you clear your data or switch devices. Here it sits in a volume StartOS backs up.
 
 ## Getting set up
 
 1. Open **Chama** from the Interfaces tab.
-2. Create a new Chama identity or import your existing Nostr account key.
-3. Join your chosen Fedimint federation inside Chama.
-4. Save the Nostr account key and any exported ecash fund backups somewhere safe.
+2. Create a new Chama identity, or import your existing Nostr account key.
+3. Choose your home community and join its Fedimint federation from inside Chama.
+4. Save your Nostr account key somewhere safe.
 
-The native wallet cannot receive or escrow ecash until it has joined a federation.
+Until you have joined a federation you can browse Chama, but your wallet cannot receive or escrow ecash.
 
-While the wallet or Nostr relays are still starting, Chama keeps you signed in and preserves your selected home community. The Chama bar shows **Connecting** during startup and **Reconnect** if it fails. On accounts with a long trade history, **Checking your complete trade history…** stays visible — and action badges and old listing reminders stay hidden — until Chama has replayed your saved trades and finished its relay discovery pass.
+While the wallet is starting up, Chama keeps you signed in and shows **Connecting**. If it fails, use **Reconnect**. On an account with a long trade history you may see **Checking your complete trade history…** for a while — reminders and attention counts appear once that finishes.
 
-Your Nostr account key restores your identity and trade history, not bearer ecash. Move each completed trade out through Lightning, on-chain, or ecash, and keep exported notes somewhere safe.
+## Using Chama
 
-On iPhone, use standard Safari if a third-party or private browser reports that secure local wallet storage is unavailable; its "unknown transient reason (e.g. out of memory)" message is a browser storage error and does not mean the phone is out of memory.
+### Web interface
 
-## Backups
+Chama opens on your own marketplace: post offers, negotiate directly with the other trader, and settle through your federation, Lightning, or on-chain Bitcoin. A community arbiter is part of the escrow but only steps in when a trade needs help — the [technical overview](https://github.com/jesuspirate/chama/blob/main/chama-technical-overview.pdf) covers how that escrow is built if you want the detail.
 
-StartOS backs up the native wallet data stored on the server. Your Nostr identity, contacts, drafts, settings, and browser-side trade cache belong to the exact browser origin used to open Chama and are not included in the server backup.
+**Open Chama at one address and stay on it.** Your identity, contacts, drafts, and settings are stored by your browser and tied to the exact address you used. Reaching the same server over LAN, over Tor, or through a custom domain gives you three separate, empty Chamas — the wallet on the server is shared, but nothing else is.
 
-Do not treat the Nostr account key as an ecash balance backup. For funds, use Chama's ecash export and store the bearer note safely.
+### Wallet Bridge Status
 
-## Wallet Bridge Status
+Run this when Chama loads but balances, payments, or escrow are unavailable. It reports whether your wallet is answering, whether it has joined a federation, and whether relay discovery is working — which tells you whether the problem is the wallet, the federation, or your relays.
 
-The read-only **Wallet Bridge Status** action reports whether the native wallet bridge responds, whether Chama has joined a federation, and whether federation relay discovery is reachable, degraded, still probing, or not configured. Run it when Chama loads but wallet balances or payments are unavailable.
+It only reads. Nothing changes, and you can run it as often as you like.
 
-## Security note
+## Limitations
 
-The browser session and native wallet can authorize real payments. Expose the interface only through addresses and devices you trust.
+**Your backup covers your money, not your identity.** StartOS backs up the ecash wallet on your server. Your Nostr account key, contacts, drafts, and settings are in your browser and are not included. Back up your Nostr key yourself, and store any exported ecash notes safely — the key restores who you are and what you traded, not the ecash itself.
 
-## Documentation
-
-- [Chama website](https://getchama.app/)
-- [Technical overview](https://github.com/jesuspirate/chama/blob/main/chama-technical-overview.pdf)
-- [Relay operations](https://github.com/jesuspirate/chama/blob/main/docs/RELAY_OPERATIONS.md)
+**If your install once ran three Chama clients**, the second and third wallets are still on the server and in your backups, but are no longer shown anywhere. If you knowingly left ecash in one of them, export it before upgrading.

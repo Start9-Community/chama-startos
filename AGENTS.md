@@ -26,6 +26,8 @@ verified, tried, and decided belongs in the commit message and the PR body.
 
 ## This repo
 
+- **`Start9-Community/chama` is archived and is a source for nothing.** Never fetch it, merge it,
+  or read a version off it; its ahead/behind count against the application is meaningless.
 - **The application is the `chama/` submodule and is never edited here.** Fixes to Chama itself
   go to <https://github.com/jesuspirate/chama>; this repo moves the pin once the fix is tagged.
   If a fix upstream hasn't taken is genuinely needed, add a `patches/` directory applied in the
