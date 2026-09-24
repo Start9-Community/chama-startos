@@ -12,7 +12,7 @@ WORKDIR /app
 COPY chama/package.json chama/package-lock.json ./
 RUN npm ci
 COPY chama/ ./
-RUN VITE_CHAMA_NATIVE_BRIDGE_REQUIRED=1 VITE_CHAMA_NATIVE_BRIDGE_URL=/bridge npm run build
+RUN CHAMA_RELEASE=1 VITE_CHAMA_NATIVE_BRIDGE_REQUIRED=1 VITE_CHAMA_NATIVE_BRIDGE_URL=/bridge npm run build
 
 FROM nginx:1.27-bookworm
 COPY startos/nginx.conf /etc/nginx/nginx.conf
