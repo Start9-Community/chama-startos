@@ -1,7 +1,7 @@
 import { IMPOSSIBLE, VersionInfo } from '@start9labs/start-sdk'
 
 export const current = VersionInfo.of({
-  version: '6.4.18:0',
+  version: '6.4.18:1',
   releaseNotes: {
     en_US:
       "Chama 6.4.18 closes the last hop: votes, claims and rulings now wake your phone, so \"your sats are ready\" reaches you with the app closed. Rail buttons are two words again, with cost and timing underneath. Market offers say how the buyer gets it: ship, meet, service or digital. Bill Pay's go-live screen shows bill + bonus = what you'll receive. Browse says plainly that \"All\" is everyone's offers but yours. Circles don't rotate yet — that's coming in 6.5. Nothing to migrate: just update.\n\nStartOS package improvements.",
