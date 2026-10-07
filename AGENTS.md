@@ -18,37 +18,36 @@ Freshly scaffolded? Work the
 guide page, not a file in this repo — read it, don't copy it in.
 
 Keep `README.md` (technical reference for an AI support or administering agent) and
-`instructions.md` (end-user docs) in sync with your changes.
+`instructions.md` (end-user docs) in sync with your changes. This file restates neither:
+whoever changes the package has both, so it carries only what they don't — repo mechanics,
+a change that looks right and is not, where the next thing gets added, a naming trap, a
+build or test invocation particular to this repo.
 
-**Bugs and feature requests are GitHub issues on this repo** — file them as you find them.
+**Fix a defect you spot rather than reporting it** — you have the package open and the
+context to be sure. File **a GitHub issue on this repo** only when the call isn't yours to
+make: you can't pin the cause down, two defensible fixes exist, or it's too large to ride on
+the work in hand. An open issue is a report, not a queue — implement one when you're asked
+to or when it's labelled `Approved`, then close it with `Closes #<n>`.
+
 Don't record work in the repo instead: no `TODO.md`, no `NOTES.md`, no `PLAN.md`. What you
 verified, tried, and decided belongs in the commit message and the PR body.
 
 ## This repo
 
-- **`Start9-Community/chama` is archived and is a source for nothing.** Never fetch it, merge it,
-  or read a version off it; its ahead/behind count against the application is meaningless.
-- **The application is the `chama/` submodule and is never edited here.** Fixes to Chama itself
-  go to <https://github.com/jesuspirate/chama>; this repo moves the pin once the fix is tagged.
-  If a fix upstream hasn't taken is genuinely needed, add a `patches/` directory applied in the
-  `Dockerfile` — see [electrs-startos](https://github.com/Start9-Community/electrs-startos) —
-  and never by copying source in.
-- **`startos/utils.ts`'s `clients` array is the TypeScript source for the single Chama interface.**
-  `startos/nginx.conf` and `startos/entrypoint.sh` hardcode the matching UI and bridge ports, so
-  changing the interface means editing all three and verifying they agree. Preserve the legacy
-  `client-one` / `client-one-host` identifiers, port 8080, bridge port 8787, and `/data/client-1`
-  across upgrades: they retain the existing browser origin and native wallet.
-- **The `.dockerignore` prunes the submodule, not just this repo.** The application tree carries
-  the Android, Tauri, marketing and docs trees — over 100 MB that `s9pk pack` would otherwise
-  upload as build context on every arch. Anything the Vite build or the Rust bridge needs must
-  stay out of that ignore list.
-- **Keep the entrypoint's zombie check.** `kill -0` still succeeds for an unreaped zombie, so
-  without reading the process state a natively-aborted bridge leaves nginx serving a
-  healthy-looking UI whose bridge upstream is permanently dead.
-- **The long `proxy_send_timeout` on the invoice path is load-bearing.** It is a long poll held
-  open until a human pays; at nginx's default it hung up mid-scan and returned a 504 page the
-  client read as a rejected payment.
-- **`icon.png` is a 512×512 downscale of the application's `src-tauri/icons/icon.png`.** The
-  1024×1024 original is ~713 KB and a package icon is embedded as a base64 data URL in every
-  registry index. Regenerate with:
+- **The application is the `chama/` submodule, from <https://github.com/jesuspirate/chama>, and is
+  never edited here.** Fixes go upstream and this repo moves the pin once they are tagged; a fix
+  upstream hasn't taken goes in a `patches/` directory applied in the `Dockerfile` (see
+  [electrs-startos](https://github.com/Start9-Community/electrs-startos)), never as copied-in
+  source. `Start9-Community/chama` is archived: never fetch it, merge it, or read a version off it.
+  The `.dockerignore` prunes the submodule too, so anything the Vite build or the Rust bridge
+  needs must stay out of it.
+- **`startos/utils.ts`'s `clients`, `startos/nginx.conf` and `startos/entrypoint.sh` carry the same
+  UI and bridge ports** — change all three together. Never rename `client-one` /
+  `client-one-host` or move port 8080, bridge port 8787 or `/data/client-1`: they hold the
+  existing browser origin and native wallet.
+- **Keep the entrypoint's zombie check and the hour-long `proxy_send_timeout` on the invoice
+  path.** Without the first a natively-aborted bridge looks alive; without the second nginx
+  ends an unpaid invoice's long poll with a 504 the client reads as a rejected payment.
+- **`icon.png` is a 512×512 downscale of the application's `src-tauri/icons/icon.png`**, kept
+  small because the icon is embedded in every registry index. Regenerate with:
   `convert chama/src-tauri/icons/icon.png -filter Lanczos -resize 512x512 -strip -quality 95 icon.png`
