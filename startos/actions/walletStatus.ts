@@ -61,6 +61,7 @@ export const walletStatus = sdk.Action.withoutInput(
               masked: false,
               copyable: false,
               qr: false,
+              launchable: false,
             }
           const status = health.discovery?.status ?? ''
           return {
@@ -76,6 +77,7 @@ export const walletStatus = sdk.Action.withoutInput(
                 masked: false,
                 copyable: false,
                 qr: false,
+                launchable: false,
               },
               {
                 type: 'single' as const,
@@ -89,6 +91,7 @@ export const walletStatus = sdk.Action.withoutInput(
                 masked: false,
                 copyable: false,
                 qr: false,
+                launchable: false,
               },
             ],
           }
