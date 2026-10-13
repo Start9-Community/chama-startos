@@ -34,7 +34,9 @@ The pin is the submodule's recorded commit in this repo's tree.
    `de_DE`, `pl_PL`, `fr_FR`): one or two sentences on what a StartOS user can
    observe, plus a migration instruction if they need one. Not the application
    changelog.
-4. If only the packaging changed, leave the submodule and the upstream half of
+4. Run `make format`. The build checks `startos/` against the SDK's Prettier
+   config and fails on any unformatted file, release notes included.
+5. If only the packaging changed, leave the submodule and the upstream half of
    the version alone and increment the revision instead (`X.Y.Z:0` → `X.Y.Z:1`).
 
 A migration is only needed when the on-disk layout under `/data` changes. A plain
