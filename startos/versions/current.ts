@@ -1,18 +1,18 @@
 import { IMPOSSIBLE, VersionInfo } from '@start9labs/start-sdk'
 
 export const current = VersionInfo.of({
-  version: '6.4.28:0',
+  version: '6.4.29:0',
   releaseNotes: {
     en_US:
-      "Chama 6.4.28 shows Open in Fedi for the ecash notes you withdraw, so one tap opens the note in Fedi, ready to claim. Taking a note back is more careful: if Chama can't be sure the note came back, the card stays so you can try again. Nothing to migrate: just update.",
+      "Chama 6.4.29 checks Lightning-address payouts more carefully: before any sats leave, it stops if the payout server isn't secure or returns the wrong invoice. Phone number examples show your own country's code, Benin's new 10-digit numbers save as payment details, and wide screens show one Chama logo, not two. Nothing to migrate: just update.",
     es_ES:
-      "Chama 6.4.28 muestra Abrir en Fedi para las notas de ecash que retiras, así que un toque abre la nota en Fedi, lista para reclamar. Devolver una nota es más cuidadoso: si Chama no puede estar seguro de que la nota volvió, la tarjeta se queda para que lo intentes de nuevo. No hay nada que migrar: solo actualiza.",
+      "Chama 6.4.29 revisa con más cuidado los pagos a una dirección Lightning: antes de que salga cualquier sat, se detiene si el servidor del pago no es seguro o devuelve una factura equivocada. Los ejemplos de números de teléfono muestran el código de tu propio país, los nuevos números de 10 dígitos de Benín se guardan como datos de pago y las pantallas anchas muestran un solo logo de Chama, no dos. No hay nada que migrar: solo actualiza.",
     de_DE:
-      "Chama 6.4.28 zeigt „In Fedi öffnen“ für die Ecash-Noten, die du abhebst, sodass ein Tippen die Note in Fedi öffnet, bereit zum Einlösen. Eine Note zurückzuholen ist jetzt vorsichtiger: Wenn Chama nicht sicher sein kann, dass die Note zurückgekommen ist, bleibt die Karte, damit du es erneut versuchen kannst. Nichts zu migrieren: einfach aktualisieren.",
+      "Chama 6.4.29 prüft Auszahlungen an eine Lightning-Adresse sorgfältiger: Bevor Sats das Wallet verlassen, bricht es ab, wenn der Auszahlungsserver nicht sicher ist oder eine falsche Rechnung zurückgibt. Beispiele für Telefonnummern zeigen die Vorwahl deines eigenen Landes, Benins neue 10-stellige Nummern lassen sich als Zahlungsdaten speichern, und breite Bildschirme zeigen ein Chama-Logo statt zwei. Nichts zu migrieren: einfach aktualisieren.",
     pl_PL:
-      "Chama 6.4.28 pokazuje „Otwórz w Fedi” dla wypłaconych notatek ecash, więc jedno dotknięcie otwiera notatkę w Fedi, gotową do odebrania. Zwrot notatki jest ostrożniejszy: jeśli Chama nie ma pewności, że notatka wróciła, karta zostaje, abyś mógł spróbować ponownie. Nic do migracji: po prostu zaktualizuj.",
+      "Chama 6.4.29 dokładniej sprawdza wypłaty na adres Lightning: zanim jakiekolwiek sats wyjdą, zatrzymuje się, jeśli serwer wypłaty nie jest bezpieczny lub zwraca niewłaściwą fakturę. Przykładowe numery telefonów pokazują kierunkowy twojego kraju, nowe 10-cyfrowe numery z Beninu zapisują się jako dane płatności, a szerokie ekrany pokazują jedno logo Chamy zamiast dwóch. Nic do migracji: po prostu zaktualizuj.",
     fr_FR:
-      "Chama 6.4.28 affiche « Ouvrir dans Fedi » pour les notes ecash que vous retirez : un geste ouvre la note dans Fedi, prête à être réclamée. Reprendre une note est plus prudent : si Chama ne peut pas être sûr que la note est revenue, la carte reste pour que vous puissiez réessayer. Rien à migrer : il suffit de mettre à jour.",
+      "Chama 6.4.29 vérifie plus soigneusement les paiements vers une adresse Lightning : avant que le moindre sat parte, il s'arrête si le serveur de paiement n'est pas sécurisé ou renvoie une mauvaise facture. Les exemples de numéros de téléphone affichent l'indicatif de votre pays, les nouveaux numéros à 10 chiffres du Bénin s'enregistrent comme coordonnées de paiement, et les grands écrans affichent un seul logo Chama au lieu de deux. Rien à migrer : il suffit de mettre à jour.",
   },
   migrations: {
     up: async ({ effects }) => {},
